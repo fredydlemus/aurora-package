@@ -56,3 +56,6 @@ jobs:
         - name: Display error
           if: failure()
           run: cat /home/runner/.npm/_logs/*.log
+        - name: Verify .npmrc configuration
+          if: failure()
+          run: cat ~/.npmrc
