@@ -46,6 +46,8 @@ jobs:
             node-version: '16.x'
             registry-url: 'https://npm.pkg.github.com'
             scope: '@fredydlemus'
+        - name: Verify .npmrc configuration
+          run: cat ~/.npmrc
         - name: Download artifact
           uses: actions/download-artifact@v3
           with:
