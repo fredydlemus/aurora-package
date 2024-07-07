@@ -51,7 +51,7 @@ jobs:
         - name: Check contents 2
           run: ls -la
         - name: Verify .npmrc configuration
-          run: cat ~/.npmrc
+          run: cat .npmrc
         - name: Download artifact
           uses: actions/download-artifact@v3
           with:
