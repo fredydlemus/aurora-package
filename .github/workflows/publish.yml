@@ -64,4 +64,4 @@ jobs:
           run: cat /home/runner/.npm/_logs/*.log
         - name: Verify .npmrc configuration
           if: failure()
-          run: cat ~/.npmrc
+          run: cat .npmrc
