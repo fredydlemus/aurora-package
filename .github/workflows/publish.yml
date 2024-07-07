@@ -5,6 +5,7 @@ name: Publish Package
 on:
     release:
         types: [created]
+    workflow_dispatch:
 jobs:
     unit-test:
         name: Unit Test
