@@ -13,3 +13,19 @@ jobs:
               run: npm install
             - name: Unir Test
               run: npm test 
+    build:
+      name: Build
+      needs: unit-test
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+        - name: Clean Install
+          run: npm ci
+        - name: Build
+          run: npm run build
+        - name: Upload artifact
+          uses: actions/upload-artifact@v3
+          with:
+            name: service-build
+            path: ./dist
