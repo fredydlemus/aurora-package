@@ -48,6 +48,7 @@ jobs:
             node-version: '16.x'
             registry-url: 'https://npm.pkg.github.com'
             scope: '@fredydlemus'
+        - run: echo registry=https://npm.pkg.github.com/fredydlemus >> .npmrc
         - name: Check contents 2
           run: ls -la
         - name: Verify .npmrc configuration
