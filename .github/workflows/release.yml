@@ -16,8 +16,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           version-file: './package.json,./package-lock.json'
-      - name: Changelog result
-        run: echo ${{ steps.changelog.outputs.skipped}}  
       - name: save outputs
         id: save-outputs
         run: echo "tag=${{ steps.changelog.outputs.tag }}" >> $GITHUB_OUTPUT
