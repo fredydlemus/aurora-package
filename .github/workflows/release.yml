@@ -15,6 +15,7 @@ jobs:
         uses: TriPSs/conventional-changelog-action@v5
         with:
           version-file: './package.json,./package-lock.json'
+          git-branch: 'release'
       - name: save outputs
         id: save-outputs
         run: echo "tag=${{ steps.changelog.outputs.tag }}" >> $GITHUB_OUTPUT
