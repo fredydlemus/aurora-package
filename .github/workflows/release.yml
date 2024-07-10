@@ -1,0 +1,37 @@
+name: Releases
+on:
+  workflow_dispatch:
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.changelog.outputs.tag }}
+      skipped: ${{ steps.changelog.outputs.skipped }}
+      clean_changelog: ${{ steps.changelog.outputs.clean_changelog }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3.7.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version-file: './package.json,./package-lock.json'
+      - name: save outputs
+        id: save-outputs
+        run: echo "tag=${{ steps.changelog.outputs.tag }}" >> $GITHUB_OUTPUT
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+  release:
+    needs: changelog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ needs.changelog.outputs.skipped == 'false' }}
+        uses: actions/create-release@v1
+        with:
+            tag_name: ${{ needs.changelog.outputs.tag }}
+            release_name: Release ${{ needs.changelog.outputs.tag }}
+            body: ${{ needs.changelog.outputs.clean_changelog }}
+      
