@@ -12,9 +12,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Conventional Changelog Action
         id: changelog
-        uses: TriPSs/conventional-changelog-action@v3.7.1
+        uses: TriPSs/conventional-changelog-action@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           version-file: './package.json,./package-lock.json'
       - name: save outputs
         id: save-outputs
